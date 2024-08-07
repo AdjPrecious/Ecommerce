@@ -1,0 +1,12 @@
+﻿@using EWebApp
+@using EWebApp.Data
+@using EWebApp.Models
+@using EWebApp.Models.ProductVM
+@using EWebApp.Models.Shopping
+@using EWebApp.Models.Account
+@using Microsoft.AspNetCore.Identity
+@Html.DropDownList("ProductTypedId", (IEnumerable<SelectListItem>)ViewBag.ProductTypeSelectList, "Select a Product Type")
+
+
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

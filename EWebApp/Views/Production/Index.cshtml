@@ -1,0 +1,258 @@
+﻿@model IEnumerable<Products>
+
+@{
+    ViewData["Title"] = "All Products";
+
+}
+
+<div class="container">
+
+    <div class="card-header text-center">
+        <h3>Furnitures</h3>
+    </div>
+    @foreach (var items in Model)
+    {
+        var photoPath = "~/Images/";
+        if (string.IsNullOrEmpty(items.Photo))
+        {
+            photoPath += "me.jpg";
+        }
+        else
+        {
+            photoPath += items.Photo;
+        }
+        if (items.ProduceCategory == ProductCategory.Furniture)
+
+        {
+
+
+            <div class="col-md-4 col-xs-6 border-primary d-inline-flex ">
+                <div class="crow card flex-grow-0" style="max-width: 540px">
+                    <div class="row g-0">
+                        <div class="col-md-12">
+                            <div class="card-header text-white bg-info">
+                                <p class="card-text">
+                                    <h5 class="card-title text-center">
+                                        @items.Name
+                                    </h5>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <img src="@photoPath" asp-append-version="true" class="imageThumbnail" />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <p class="card-text">@items.Description</p>
+                                <p class="card-text">@items.Price.ToString("c")</p>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card-footer">
+                                <p class="card-text">
+                                    <a asp-action="Details" asp-controller="Production" asp-route-id="@items.Id" class="btn btn-outline-primary float-right"><i class="bi bi-eye-fill">Show Details</i></a>
+                                    <a asp-action="AddItemToShoppingCart" asp-controller="Order" asp-route-id="@items.Id" class="btn btn-outline-success text-black"><i class="bi bi-cart-plus">Add to cart(Price: @items.Price.ToString("c"))</i></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    <div class="card-footer mb-3 text-center"> <a asp-action="index" asp-controller="Furniture" class="btn float-right">More....</a></div>
+</div>
+
+<div class="container">
+
+    <div class="card-header text-center">
+        <h3>Appliances</h3>
+    </div>
+    @foreach (var items in Model)
+    {
+        var photoPath = "~/Images/";
+        if (string.IsNullOrEmpty(items.Photo))
+        {
+            photoPath += "me.jpg";
+        }
+        else
+        {
+            photoPath += items.Photo;
+        }
+        if (items.ProduceCategory == ProductCategory.Appliances)
+        {
+
+            <div class="col-md-4 col-xs-6 border-primary d-inline-flex ">
+                <div class="card flex-grow-0" style="max-height: 540px">
+                    <div class="row g-0">
+                        <div class="col-md-12">
+                            <div class="card-header text-white bg-info">
+                                <p class="card-text">
+                                    <h5 class="card-title text-center">
+                                        @items.Name
+                                    </h5>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <img src="@photoPath" asp-append-version="true" class="imageThumbnail" />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <p class="card-text">@items.Description</p>
+                                <p class="card-text">@items.Price.ToString("c")</p>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card-footer">
+                                <p class="card-text">
+                                    <a asp-action="Details" asp-controller="Production" asp-route-id="@items.Id" class="btn btn-outline-primary float-right"><i class="bi bi-eye-fill">Show Details</i></a>
+                                    <a asp-action="AddItemToShoppingCart" asp-controller="Order" asp-route-id="@items.Id" class="btn btn-outline-success text-black"><i class="bi bi-cart-plus">Add to cart(Price: @items.Price.ToString("c"))</i></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    <div class="card-footer mb-3 text-center text-white"> <a asp-action="index" asp-controller="Appliances" class="btn float-right">More....</a></div>
+</div>
+
+<div class="container">
+
+    <div class="card-header text-center">
+        <h3>Clothing</h3>
+    </div>
+    @foreach (var items in Model)
+    {
+        var photoPath = "~/Images/";
+        if (string.IsNullOrEmpty(items.Photo))
+        {
+            photoPath += "me.jpg";
+        }
+        else
+        {
+            photoPath += items.Photo;
+        }
+
+
+        if (items.ProduceCategory == ProductCategory.Clothing)
+        {
+
+
+            <div class="col-md-4 col-xs-6 border-primary d-inline-flex ">
+                <div class="card " style="max-width: 540px">
+                    <div class="row g-0">
+                        <div class="col-md-12">
+                            <div class="card-header text-white bg-info">
+                                <p class="card-text">
+                                    <h5 class="card-title text-center">
+                                        @items.Name
+                                    </h5>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <img src="@photoPath" asp-append-version="true" class="imageThumbnail" />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <p class="card-text">@items.Description</p>
+                                <p class="card-text">@items.Price.ToString("c")</p>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card-footer">
+                                <p class="card-text">
+                                    <a asp-action="Details" asp-controller="Production" asp-route-id="@items.Id" class="btn btn-outline-primary float-right"><i class="bi bi-eye-fill">Show Details</i></a>
+                                    <a asp-action="AddItemToShoppingCart" asp-controller="Order" asp-route-id="@items.Id" class="btn btn-outline-success text-black"><i class="bi bi-cart-plus">Add to cart(Price: @items.Price.ToString("c"))</i></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    }
+    <div class="card-footer mb-3 text-center text-white"> <a asp-action="index" asp-controller="Clothing" class="btn">More....</a></div>
+</div>
+
+<div class="container">
+
+    <div class="card-header text-center">
+        <h3>Kitchen Equipments</h3>
+    </div>
+    <div class="card-body col-md-6"></div>
+    @foreach (var items in Model)
+    {
+
+        var photoPath = "~/Images/";
+        if (string.IsNullOrEmpty(items.Photo))
+        {
+            photoPath += "me.jpg";
+        }
+        else
+        {
+            photoPath += items.Photo;
+        }
+        if (items.ProduceCategory == ProductCategory.Kitchen)
+        {
+
+            <div class="col-md-4 col-xs-6 border-primary d-inline-flex ">
+                <div class="card" style="max-width: 540px">
+                    <div class="row g-0">
+                        <div class="col-md-12">
+                            <div class="card-header text-white bg-info">
+                                <p class="card-text">
+                                    <h5 class="card-title text-center">
+                                        @items.Name
+                                    </h5>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <img src="@photoPath" asp-append-version="true" class="imageThumbnail" />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <p class="card-text">@items.Description</p>
+                                <p class="card-text">@items.Price.ToString("c")</p>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card-footer">
+                                <p class="card-text">
+                                    <a asp-action="Details" asp-controller="Production" asp-route-id="@items.Id" class="btn btn-outline-primary float-right"><i class="bi bi-eye-fill">Show Details</i></a>
+                                    <a asp-action="AddItemToShoppingCart" asp-controller="Order" asp-route-id="@items.Id" class="btn btn-outline-success text-black"><i class="bi bi-cart-plus">Add to cart (Price: @items.Price.ToString("c"))</i></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    <div class="card-footer mb-3 text-center text-white"> <a asp-action="index" asp-controller="Kitchen" class="btn float-right text-black">More....</a></div>
+</div>
+@await Html.PartialAsync("_CreateProduct", "Production")
+
+
+
+
+
+
+

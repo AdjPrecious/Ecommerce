@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Products>
+
+@{
+    ViewData["Title"] = "Furnitures";
+}
+
+<div class="card-header text-center">
+    <h3>Furnitures</h3>
+</div>
+@foreach (var items in Model)
+{
+    var photoPath = "~/Images/";
+    if (string.IsNullOrEmpty(items.Photo))
+    {
+        photoPath += "me.jpg";
+    }
+    else
+    {
+        photoPath += items.Photo;
+    }
+    <div class="col-md-4 col-xs-6 border-primary mb-3 ">
+        <div class="card mb-3" style="max-width: 540px">
+            <div class="row g-0">
+                <div class="col-md-12">
+                    <div class="card-header text-white bg-info">
+                        <p class="card-text">
+                            <h5 class="card-title text-center">
+                                @items.Name
+                                @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                                {
+                                    <form asp-action="Delete" asp-controller="Production" asp-route-id="@items.Id" method="post">
+                                        <a asp-controller="Production" class="btn btn-outline-secondary" asp-action="Edit" asp-route-id="@items.Id"><i class="bi bi-pencil-square"></i></a>
+                                        <button type="submit" class="btn btn-outline-secondary"><i class="bi bi bi-trash3"></i></button>
+                                    </form>
+                                }
+                            </h5>
+
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <img src="@photoPath" asp-append-version="true" class="imageThumbnail" />
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <p class="card-text">@items.Description</p>
+                        <p class="card-text">@items.Price.ToString("c")</p>
+
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+                    <div class="card-footer">
+                        <p class="card-text">
+                            <a asp-action="Details" asp-controller="Production" asp-route-id="@items.Id" class="btn btn-outline-primary float-right"><i class="bi bi-eye-fill">Show Details</i></a>
+                            <a asp-action="AddItemToShoppingCart" asp-controller="Order" asp-route-id="@items.Id" class="btn btn-outline-success text-black"><i class="bi bi-cart-plus">Add to cart(Price: @items.Price.ToString("c")</i></a>
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                            {
+
+                                
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+        
+@await Html.PartialAsync("_CreateProduct", "Production")

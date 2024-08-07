@@ -1,0 +1,38 @@
+﻿@model ProductDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    var photoPath = "~/Images/";
+    if (string.IsNullOrEmpty(Model.products.Photo))
+    {
+        photoPath += "me.jpg";
+    }
+    else
+    {
+        photoPath += Model.products.Photo;
+    }
+}
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Model.products.Name</h1>
+            </div>
+            <div class="card-body" text-center>
+                <img class="card-img-top" src="@photoPath" asp-append-version="true" />
+
+                <h4>Product Category : @Model.products.ProduceCategory</h4>
+                <h4>Price : @Model.products.Price</h4>
+                <h4>Description : @Model.products.Description</h4>
+
+
+            </div>
+            <div class="card-footer" text-center>
+                <a asp-controller="Production" asp-action="index" class="btn btn-primary"><i class="bi bi-back">Back</i></a>
+                <a asp-action="AddItemToShoppingCart" asp-controller="Order" asp-route-id="@Model.products.Id" class="btn btn-outline-success text-black"><i class="bi bi-cart-plus">Add to cart (Price: @Model.products.Price.ToString("c"))</i></a>
+                
+            </div>
+        </div>
+    </div>
+</div>

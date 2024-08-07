@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Products>
+
+
+
+@{
+    ViewData["Title"] = "Filter";
+}
+
+<div class="container">
+
+    <div class="card-header text-center">
+        <h3>Filter</h3>
+    </div>
+
+    @if(Model == null)
+    {
+        <div class="alert alert-danger mt-2 mb-1">
+            
+            <hr />
+            <h5>
+                The searched Product cannot be found.
+            </h5>
+        </div>
+        <a asp-action="index" asp-controller="Production" class="btn btn-outline-success">
+            Click here to see the list of all Products
+        </a>
+    }
+    else
+    {
+
+        @foreach (var items in Model)
+        {
+            var photoPath = "~/Images/";
+            if (string.IsNullOrEmpty(items.Photo))
+            {
+                photoPath += "me.jpg";
+            }
+            else
+            {
+                photoPath += items.Photo;
+            }
+
+            <div class="col-md-4 col-xs-6 border-primary d-inline-flex ">
+                <div class="crow card flex-grow-0" style="max-width: 540px">
+                    <div class="row g-0">
+                        <div class="col-md-12">
+                            <div class="card-header text-white bg-info">
+                                <p class="card-text">
+                                    <h5 class="card-title text-center">
+                                        @items.Name
+                                    </h5>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <img src="@photoPath" asp-append-version="true" class="imageThumbnail" />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <p class="card-text">@items.Description</p>
+                                <p class="card-text">@items.Price.ToString("c")</p>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">
+                            <div class="card-footer">
+                                <p class="card-text">
+                                    <a asp-action="Details" asp-controller="Production" asp-route-id="@items.Id" class="btn btn-outline-primary float-right"><i class="bi bi-eye-fill">Show Details</i></a>
+                                    <a asp-action="AddItemToShoppingCart" asp-controller="Order" asp-route-id="@items.Id" class="btn btn-outline-success text-black"><i class="bi bi-cart-plus">Add to cart(Price: @items.Price.ToString("c"))</i></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+
+    }
+   
+    
+
+</div>
+
